@@ -64,7 +64,7 @@ fn eval_input(input: &str) -> Vec<String> {
 fn shunting_yard(input: Vec<String>) -> Vec<String> {
     let mut output_queue: Vec<String> = Vec::new();
     let mut operator_stack: Vec<String> = Vec::new();
-
+    
     for token in input {
         if is_number(&token) {
             output_queue.push(token);
