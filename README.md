@@ -33,6 +33,7 @@ To use RCCP, simply run the program, then enter an expression at the prompt:
 $ rccp
 > 2 + 3 * 4
 14
+> exit
 ```
 As we can see in this example, RCCP correctly performs the multiplication before the addition, resulting in the `14` instead of `20`.
 You do not need to add spaces in between characters.
@@ -43,6 +44,6 @@ You do not need to add spaces in between characters.
 This project is licensed under the MIT License.
 
 ## Todo
- - [ ] Add support for decimals in input and outputs
+ - [x] Add support for decimals in input and outputs
  - [ ] Add support for trigonometric functions
- - [ ] Add a way to gracefully exit
+ - [x] Add a way to gracefully exit
