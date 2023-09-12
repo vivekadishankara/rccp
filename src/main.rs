@@ -64,12 +64,15 @@ fn eval_input(input: &str) -> Vec<String> {
 fn shunting_yard(input: Vec<String>) -> Vec<String> {
     let mut output_queue: Vec<String> = Vec::new();
     let mut operator_stack: Vec<String> = Vec::new();
-    
+    let mut last_token = String::new();
     for token in input {
         if is_number(&token) {
-            output_queue.push(token);
+            output_queue.push(token.clone());
         } else if token == "(" {
-            operator_stack.push(token);
+            if is_number(&last_token) || last_token.is_empty() {
+                operator_stack.push("*".to_string());
+            }
+            operator_stack.push(token.clone());
         } else if token == ")" {
             while *operator_stack.last().unwrap() != "(" {
                 output_queue.push(operator_stack.pop().unwrap());
@@ -82,8 +85,9 @@ fn shunting_yard(input: Vec<String>) -> Vec<String> {
             {
                 output_queue.push(operator_stack.pop().unwrap());
             }
-            operator_stack.push(token);
+            operator_stack.push(token.clone());
         }
+        last_token = token.clone(); // Clone the token value
     }
 
     while !operator_stack.is_empty() {
