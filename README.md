@@ -22,7 +22,7 @@ Or you can build it from source, using the github repository.
 ```
 $ git clone https://github.com/d3vboi/rccp.git
 $ cd rccp
-$ cargo run
+$ cargo run -q
 ```
 Keep in mind, if you use this method you will need to be in the RCCP directory to be able to run the program
 ## Usage
@@ -35,7 +35,7 @@ $ rccp
 14
 > exit
 ```
-As we can see in this example, RCCP correctly performs the multiplication before the addition, resulting in the `14` instead of `20`.
+As we can see in this example, RCCP correctly performs the multiplication before the addition, resulting in the *14* instead of *20*.
 You do not need to add spaces in between characters.
 `> 2+3*4` is also a valid expression.
 
@@ -44,6 +44,5 @@ You do not need to add spaces in between characters.
 This project is licensed under the MIT License.
 
 ## Todo
- - [x] Add support for decimals in input and outputs
  - [ ] Add support for trigonometric functions
  - [x] Add a way to gracefully exit
