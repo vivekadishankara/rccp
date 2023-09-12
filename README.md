@@ -1,10 +1,13 @@
 # RCCP - Rust Calculator for Cool People
-
-RCCP is a simple command-line calculator written in Rust as an alternative to more conventional GUI calculators. It supports basic arithmetic calculation, and respects the order of operation (BIDMAS/BODMAS/PEDMAS).
+## Overview
+RCCP is a simple command-line calculator written in Rust as an alternative to more conventional GUI calculators. It supports basic arithmetic calculation, and respects the order of operation (BIDMAS/BODMAS/PEMDAS).
 
 ## Features
 
 - Basic arithmetic operations: addition (`+`), subtraction (`-`), multiplication (`*`), and division (`/`).
+- Exponents: use the `^` symbol to perform exponentiation (e.g., `2^3` equals 8).
+- Factorial: use the `!` symbol to calculate the factorial of a number (e.g., `5!` equals 120).
+
 - Order of operations: operations are performed in the correct order according to BODMAS/BIDMAS/PEDMAS rules.
 - Parentheses: parentheses can be used to change the order of operations.
 - Simple Command Line Interface
@@ -22,9 +25,10 @@ Or you can build it from source, using the github repository.
 ```
 $ git clone https://github.com/d3vboi/rccp.git
 $ cd rccp
+$ curl https://sh.rustup.rs -sSf | sh
 $ cargo run -q
 ```
-Keep in mind, if you use this method you will need to be in the RCCP directory to be able to run the program
+Keep in mind, if you use this method you will need to be in the RCCP directory to be able to run the cargo command.
 ## Usage
 
 To use RCCP, simply run the program, then enter an expression at the prompt:
@@ -45,4 +49,4 @@ This project is licensed under the MIT License.
 
 ## Todo
  - [ ] Add support for trigonometric functions
- - [x] Add a way to gracefully exit
+ - [ ] Gracefully exit when using ctrl+c

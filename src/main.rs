@@ -95,7 +95,7 @@ fn shunting_yard(input: Vec<String>) -> Vec<String> {
         if is_number(&token) {
             output_queue.push(token.clone());
         } else if token == "(" {
-            if is_number(&last_token) || last_token.is_empty() {
+            if is_number(&last_token) {
                 operator_stack.push("*".to_string());
             }
             operator_stack.push(token.clone());
