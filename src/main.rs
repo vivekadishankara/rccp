@@ -1,9 +1,14 @@
+/*                                   
+ \                                        /
+ / RCCP - Rust Calculator for Cool People \
+ \          Author: d3vboi                /
+ /                                        \
+ */ 
+
 use std::io;
 use std::io::Write;
 
-fn is_integer(s: &str) -> bool {
-    s.parse::<i32>().is_ok()
-}
+
 struct Operators {}
 impl Operators {
     fn add(&self, a: i32, b: i32) -> i32 {
@@ -18,6 +23,10 @@ impl Operators {
     fn divide(&self, a: i32, b: i32) -> i32 {
         a / b
     }
+}
+
+fn is_integer(s: &str) -> bool {
+    s.parse::<i32>().is_ok()
 }
 
 // Parses operator precedence
