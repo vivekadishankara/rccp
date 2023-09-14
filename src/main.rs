@@ -57,6 +57,7 @@ fn is_number(s: &str) -> bool {
 }
 
 fn eval_input(input: &str) -> Vec<String> {
+    let input = input.replace(" ", "").replace(",", ".").replace("sin", "s").replace("cos", "c").replace("tan", "t");
     if input == "exit\n" {
         std::process::exit(0);
     }
@@ -65,9 +66,19 @@ fn eval_input(input: &str) -> Vec<String> {
     let mut current_number = String::new();
 
     split_input.remove(split_input.len() - 1); // Remove the newline
-    for c in split_input {
-        if is_number(&c.to_string()) || c == '.' {
-            current_number.push(c);
+    for (i, c) in split_input.iter().enumerate() {
+        if is_number(&c.to_string()) || *c == '.'{
+            current_number.push(*c);
+        } else if *c == '-' {
+            if i == 0 || !is_number(&split_input[i - 1].to_string()) {
+                current_number.push(*c);
+            } else {
+                if !current_number.is_empty() {
+                    output.push(current_number.clone());
+                    current_number.clear();
+                }
+                output.push(c.to_string());
+            }
         } else {
             if !current_number.is_empty() {
                 output.push(current_number.clone());
@@ -80,8 +91,6 @@ fn eval_input(input: &str) -> Vec<String> {
     if !current_number.is_empty() {
         output.push(current_number);
     }
-    // Inline for loop to remove spaces
-    output = output.into_iter().filter(|x| x != " ").collect();
 
     output
 }
@@ -133,8 +142,8 @@ where
     let result = operation(a, b);
     stack.push(result);
 }
-// Perform a factorial on the stack
-fn perform_factorial<F>(stack: &mut Vec<f64>, operation: F)
+// Perform a unary operation on the stack
+fn perform_unary_operation<F>(stack: &mut Vec<f64>, operation: F)
 where
     F: FnOnce(f64) -> f64,
 {
@@ -159,7 +168,10 @@ fn eval_rpn(input: Vec<String>, ops: &Operators) -> f64 {
             "*" => perform_operation(&mut stack, |a, b| ops.multiply(a, b)),
             "/" => perform_operation(&mut stack, |a, b| ops.divide(a, b)),
             "^" => perform_operation(&mut stack, |a, b| ops.power(a, b)),
-            "!" => perform_factorial(&mut stack, |a| ops.factorial(a)),
+            "!" => perform_unary_operation(&mut stack, |a| ops.factorial(a)),
+            "s" => perform_unary_operation(&mut stack, |a| ops._sin(a)), // sin
+            "c" => perform_unary_operation(&mut stack, |a| ops._cos(a)), // cos
+            "t" => perform_unary_operation(&mut stack, |a| ops._tan(a)), // tan
             _ => panic!("Unknown operator: {}", token),
         };
     }
@@ -176,6 +188,9 @@ fn parse_operator(operator: &str) -> i32 {
         "/" => 2,
         "^" => 3,
         "!" => 3,
+        "s" => 3, // sin
+        "c" => 3, // cos
+        "t" => 3, // tan
         _ => 0
     }
 }

@@ -7,7 +7,7 @@ RCCP is a simple command-line calculator written in Rust as an alternative to mo
 - Basic arithmetic operations: addition (`+`), subtraction (`-`), multiplication (`*`), and division (`/`).
 - Exponents: use the `^` symbol to perform exponentiation (e.g., `2^3` equals 8).
 - Factorial: use the `!` symbol to calculate the factorial of a number (e.g., `5!` equals 120).
-
+- Trigonometry: use `sin`, `cos`, and `tan` in your equations (e.g., `sin(16)`)
 - Order of operations: operations are performed in the correct order according to BODMAS/BIDMAS/PEDMAS rules.
 - Parentheses: parentheses can be used to change the order of operations.
 - Simple Command Line Interface
@@ -29,6 +29,7 @@ $ curl https://sh.rustup.rs -sSf | sh
 $ cargo run -q
 ```
 Keep in mind, if you use this method you will need to be in the RCCP directory to be able to run the cargo command.
+
 ## Usage
 
 To use RCCP, simply run the program, then enter an expression at the prompt:
@@ -48,5 +49,9 @@ You do not need to add spaces in between characters.
 This project is licensed under the MIT License.
 
 ## Todo
- - [ ] Add support for trigonometric functions
+ - [ ] Support for logarithms, square roots, etc
  - [ ] Gracefully exit when using ctrl+c
+ - [ ] Support for arrow keys (e.g., expression history)
+ - [ ] Error handling
+ - [ ] Variable support + constant support (e.g., pi and e)
+ - [ ] Minor bug fixes

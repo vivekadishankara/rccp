@@ -2,7 +2,7 @@
 name = "rccp"
 description = "Rust Calculator for Cool People"
 repository = "https://github.com/d3vboi/rccp"
-version = "0.1.9"
+version = "0.2.0"
 edition = "2021"
 
 readme = "README.md"
