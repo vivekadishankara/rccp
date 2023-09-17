@@ -38,17 +38,23 @@ impl Operators {
             n * self.factorial(n - 1.0)
         }
     }
-    // TODO: Implement trig functions
-    fn _sin(&self, angle: f64) -> f64 {
+    fn sqrt(&self, n: f64) -> f64 {
+        n.sqrt()
+    }
+
+    fn sin(&self, angle: f64) -> f64 {
         angle.sin()
     }
 
-    fn _cos(&self, angle: f64) -> f64 {
+    fn cos(&self, angle: f64) -> f64 {
         angle.cos()
     }
 
-    fn _tan(&self, angle: f64) -> f64 {
+    fn tan(&self, angle: f64) -> f64 {
         angle.tan()
+    }
+    fn log(&self, n: f64) -> f64 {
+        n.log10()
     }
 }
 
@@ -57,7 +63,7 @@ fn is_number(s: &str) -> bool {
 }
 
 fn eval_input(input: &str) -> Vec<String> {
-    let input = input.replace(" ", "").replace(",", ".").replace("sin", "s").replace("cos", "c").replace("tan", "t");
+    let input = input.replace(" ", "").replace(",", ".").replace("sin", "s").replace("cos", "c").replace("tan", "t").replace("log", "l").replace("sqrt", "q");
     if input == "exit\n" {
         std::process::exit(0);
     }
@@ -169,9 +175,11 @@ fn eval_rpn(input: Vec<String>, ops: &Operators) -> f64 {
             "/" => perform_operation(&mut stack, |a, b| ops.divide(a, b)),
             "^" => perform_operation(&mut stack, |a, b| ops.power(a, b)),
             "!" => perform_unary_operation(&mut stack, |a| ops.factorial(a)),
-            "s" => perform_unary_operation(&mut stack, |a| ops._sin(a)), // sin
-            "c" => perform_unary_operation(&mut stack, |a| ops._cos(a)), // cos
-            "t" => perform_unary_operation(&mut stack, |a| ops._tan(a)), // tan
+            "q" => perform_unary_operation(&mut stack, |a| ops.sqrt(a)), // sqrt
+            "s" => perform_unary_operation(&mut stack, |a| ops.sin(a)), // sin
+            "c" => perform_unary_operation(&mut stack, |a| ops.cos(a)), // cos
+            "t" => perform_unary_operation(&mut stack, |a| ops.tan(a)), // tan
+            "l" => perform_unary_operation(&mut stack, |a| ops.log(a)), // log
             _ => panic!("Unknown operator: {}", token),
         };
     }
@@ -188,9 +196,11 @@ fn parse_operator(operator: &str) -> i32 {
         "/" => 2,
         "^" => 3,
         "!" => 3,
+        "q" => 3, // sqrt
         "s" => 3, // sin
         "c" => 3, // cos
         "t" => 3, // tan
+        "l" => 3, // log
         _ => 0
     }
 }
