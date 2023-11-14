@@ -51,7 +51,6 @@ You do not need to add spaces in between characters.
 This project is licensed under the MIT License.
 
 ## Todo
- - [ ] Gracefully exit when using ctrl+c
  - [ ] Support for arrow keys (e.g., expression history)
  - [ ] Error handling
  - [ ] Variable support + constant support (e.g., pi and e)

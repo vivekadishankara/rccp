@@ -4,7 +4,8 @@
  \          Author: d3vboi                /
  /                                        \
 */ 
-
+use colored::Colorize;
+use rustyline::{DefaultEditor, Result, error::ReadlineError};
 use std::io;
 use std::io::Write;
 
@@ -180,7 +181,7 @@ fn eval_rpn(input: Vec<String>, ops: &Operators) -> f64 {
             "c" => perform_unary_operation(&mut stack, |a| ops.cos(a)), // cos
             "t" => perform_unary_operation(&mut stack, |a| ops.tan(a)), // tan
             "l" => perform_unary_operation(&mut stack, |a| ops.log(a)), // log
-            _ => panic!("Unknown operator: {}", token),
+            _ => if token == "(" { panic!("Unknown operator: (, perhaps you forgot a closing bracket")} else {panic!("Unknown operator: {}", token)},
         };
     }
 
@@ -206,6 +207,8 @@ fn parse_operator(operator: &str) -> i32 {
 }
 
 fn main() {
+    println!("{}{}{}{}{}{}{}{}{}
+              {}{}", "Welcome to the ", "R".bold(), "ust ", "C".bold(), "alculator for ", "C".bold(), "ool ","P".bold(),"eople.", "Created by ", "d3vboi".purple().bold());
     let ops = Operators {};
     loop {
         let mut input = String::new();
