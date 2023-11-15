@@ -15,23 +15,18 @@ impl Operators {
     fn add(&self, a: f64, b: f64) -> f64 {
         a + b
     }
-
     fn subtract(&self, a: f64, b: f64) -> f64 {
         a - b
     }
-
     fn multiply(&self, a: f64, b: f64) -> f64 {
         a * b
     }
-
     fn divide(&self, a: f64, b: f64) -> f64 {
         a / b
     }
-
     fn power(&self, a: f64, b: f64) -> f64 {
         a.powf(b)
     }
-
     fn factorial(&self, n: f64) -> f64 {
         if n <= 1.0 {
             1.0
@@ -42,15 +37,12 @@ impl Operators {
     fn sqrt(&self, n: f64) -> f64 {
         n.sqrt()
     }
-
     fn sin(&self, angle: f64) -> f64 {
         angle.sin()
     }
-
     fn cos(&self, angle: f64) -> f64 {
         angle.cos()
     }
-
     fn tan(&self, angle: f64) -> f64 {
         angle.tan()
     }
@@ -60,7 +52,7 @@ impl Operators {
 }
 
 fn is_number(s: &str) -> bool {
-    s.parse::<f64>().is_ok()
+    s.parse::<f64>().is_ok();
 }
 
 fn parse_constants(mut input: &str) -> &str {
@@ -68,7 +60,7 @@ fn parse_constants(mut input: &str) -> &str {
     input
 }
 
-
+// Math stuff, 
 fn eval_input(input: &str) -> Vec<String> {
     let input = input.replace(" ", "").replace(",", ".").replace("sin", "s").replace("cos", "c").replace("tan", "t").replace("log", "l").replace("sqrt", "q");
     if input == "exit\n" {
@@ -78,7 +70,7 @@ fn eval_input(input: &str) -> Vec<String> {
     let mut output: Vec<String> = Vec::new();
     let mut current_number = String::new();
 
-    split_input.remove(split_input.len() - 1); // Remove the newline
+    split_input.remove(split_input.len() - 1); // Remove the newline character
     for (i, c) in split_input.iter().enumerate() {
         if is_number(&c.to_string()) || *c == '.'{
             current_number.push(*c);
@@ -102,7 +94,7 @@ fn eval_input(input: &str) -> Vec<String> {
     }
 
     if !current_number.is_empty() {
-        output.push(current_number);
+        output.push(current_number); // push the current number to the output if it isn't empty.
     }
 
     output
@@ -125,7 +117,7 @@ fn shunting_yard(input: Vec<String>) -> Vec<String> {
             while *operator_stack.last().unwrap() != "(" {
                 output_queue.push(operator_stack.pop().unwrap());
             }
-            operator_stack.pop(); // Pop the left parenthesis
+            operator_stack.pop(); // Remove the left parenthesis
         } else {
             while !operator_stack.is_empty()
                 && parse_operator(&operator_stack[operator_stack.len() - 1])
