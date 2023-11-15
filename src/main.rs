@@ -52,13 +52,9 @@ impl Operators {
 }
 
 fn is_number(s: &str) -> bool {
-    s.parse::<f64>().is_ok();
+    s.parse::<f64>().is_ok()
 }
 
-fn parse_constants(mut input: &str) -> &str {
-    let input = input.replace("pi", "3.141592653589");
-    input
-}
 
 // Math stuff, 
 fn eval_input(input: &str) -> Vec<String> {
