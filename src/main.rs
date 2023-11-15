@@ -63,6 +63,12 @@ fn is_number(s: &str) -> bool {
     s.parse::<f64>().is_ok()
 }
 
+fn parse_constants(mut input: &str) -> &str {
+    let input = input.replace("pi", "3.141592653589");
+    input
+}
+
+
 fn eval_input(input: &str) -> Vec<String> {
     let input = input.replace(" ", "").replace(",", ".").replace("sin", "s").replace("cos", "c").replace("tan", "t").replace("log", "l").replace("sqrt", "q");
     if input == "exit\n" {
