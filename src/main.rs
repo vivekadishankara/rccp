@@ -52,11 +52,7 @@ impl Operators {
     }
 }
 
-fn is_number(s: &str) -> bool {
-    s.parse::<f64>().is_ok()
-}
-
-#[derive(PartialEq, Clone)]
+#[derive(PartialEq, Clone, Debug)]
 enum Tokens {
     Number(f64),
     Operations(char),
@@ -104,20 +100,26 @@ fn eval_input(input: &str) -> Vec<Tokens> {
 }
 
 // Convert input to Reverse Polish Notation using shunting yard algorithm
-fn shunting_yard(input: Vec<Tokens>) -> Vec<Tokens> {
+fn shunting_yard(input: &Vec<Tokens>) -> Vec<Tokens> {
     let mut output_queue: Vec<Tokens> = Vec::new();
     let mut operator_stack: Vec<Tokens> = Vec::new();
     let mut last_token = Tokens::Empty;
     for token in input {
+        // if let Tokens::Number(_) = token {
+        //     output_queue.push(token.clone());
+        // } else if let Tokens::Operations(character) = token {
+
+        // }
+
         match token {
             Tokens::Number(_) => output_queue.push(token.clone()),
             Tokens::Operations(character) => {
-                if character == '(' {
+                if *character == '(' {
                     if let Tokens::Number(_) = last_token  {
                         operator_stack.push(Tokens::Operations('*'));
                     }
                     operator_stack.push(token.clone());
-                } else if character == ')' {
+                } else if *character == ')' {
                     while let Tokens::Operations('(') = operator_stack.last().unwrap() {
                         output_queue.push(operator_stack.pop().unwrap());
                     }
@@ -129,6 +131,7 @@ fn shunting_yard(input: Vec<Tokens>) -> Vec<Tokens> {
                     {
                         output_queue.push(operator_stack.pop().unwrap());
                     }
+                    operator_stack.push(token.clone());
                 }
             },
             Tokens::Empty => panic!("Unknown operator"),
@@ -227,7 +230,7 @@ fn main() {
             .read_line(&mut input)
             .expect("Failed to read input");
         let output = eval_input(&input);
-        let rpn = shunting_yard(output);
+        let rpn = shunting_yard(&output);
         let result = eval_rpn(rpn, &ops);
         println!("{}", result);
     }
