@@ -105,12 +105,6 @@ fn shunting_yard(input: &Vec<Tokens>) -> Vec<Tokens> {
     let mut operator_stack: Vec<Tokens> = Vec::new();
     let mut last_token = Tokens::Empty;
     for token in input {
-        // if let Tokens::Number(_) = token {
-        //     output_queue.push(token.clone());
-        // } else if let Tokens::Operations(character) = token {
-
-        // }
-
         match token {
             Tokens::Number(_) => output_queue.push(token.clone()),
             Tokens::Operations(character) => {
